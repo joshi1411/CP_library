@@ -28,7 +28,7 @@ void union_set(int a,int b){
 	if(a!=b){
 		if(siz[a]<siz[b])swap(a,b);
 		parent[b]=a;
-		if(siz[a]==siz[b])siz[a]+=siz[b];
+		siz[a]+=siz[b];
 	}
 }
 
