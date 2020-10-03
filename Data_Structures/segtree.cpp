@@ -19,7 +19,9 @@ query(l, r) => query from l to (r-1) of a[i]
 		while(siz < n)siz *= 2;
 		sums.assign(4*siz, 0LL);
 	}
-
+	long long merge(long long a, long long b){
+		return a + b;
+	}
 	void build(vector<int> &a, int x, int lx, int rx){
 		if(rx - lx == 1){
 			if(lx < (int)a.size()){
@@ -30,7 +32,7 @@ query(l, r) => query from l to (r-1) of a[i]
 		int mid = (lx + rx) / 2;
 		build(a, x * 2 + 1, lx, mid);
 		build(a, x * 2 + 2, mid, rx);
-		sums[x] = sums[2 * x + 1] + sums[2 * x + 2];
+		sums[x] = merge(sums[2 * x + 1], sums[2 * x + 2]);
 	}
 	void build(vector<int> &a){
 		build(a, 0, 0, siz);
@@ -47,7 +49,7 @@ query(l, r) => query from l to (r-1) of a[i]
 		} else {
 			set(i, v, 2 * x + 2, mid, rx);
 		}
-		sums[x] = sums[2 * x + 1] + sums[2 * x + 2];
+		sums[x] = merge(sums[2 * x + 1], sums[2 * x + 2]);
 	}
 
 	void set(int i, int v){
@@ -60,7 +62,7 @@ query(l, r) => query from l to (r-1) of a[i]
 		int mid = (lx + rx) / 2;
 		long long s1 = sum(l, r, 2 * x + 1, lx, mid);
 		long long s2 = sum(l, r, 2 * x + 2, mid, rx);
-		return s1 + s2;
+		return merge(s1, s2);
 	}
 
 	long long sum(int l, int r){
